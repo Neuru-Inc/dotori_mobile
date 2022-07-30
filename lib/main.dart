@@ -1,9 +1,10 @@
-import 'package:dotori_mobile/components/HomeScreen.dart';
+import 'package:dotori_mobile/screens/home_screen.dart';
 import 'package:dotori_mobile/const/colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData(primaryColor: PRIMARY_COLOR, fontFamily: 'NotoSans'),
     home: App(),
   ));
@@ -38,36 +39,39 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        unselectedIconTheme: IconThemeData(color: Colors.grey),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.image_search),
-            label: 'image_search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
-            label: 'shopping_bag',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inbox),
-            label: 'inbox',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        onTap: _onItemTapped,
+    return SafeArea(
+      child: Scaffold(
+        appBar: renderAppbar(context),
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          unselectedIconTheme: IconThemeData(color: Colors.grey),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.image_search),
+              label: 'image_search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag),
+              label: 'shopping_bag',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.inbox),
+              label: 'inbox',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.black,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
@@ -76,5 +80,36 @@ class _AppState extends State<App> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  PreferredSizeWidget renderAppbar(context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      leading: IconButton(
+        icon: Icon(Icons.menu, color: Colors.black),
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('This is a snackbar')));
+        },
+      ),
+      title: Center(
+          child: Text('DOTORI',
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black))),
+      actions: [
+        Container(
+          width: 35,
+          height: 35,
+          child: CircleAvatar(
+            radius: 50,
+            backgroundImage: NetworkImage(
+                "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80"),
+          ),
+        ),
+        SizedBox(
+          width: 20,
+        )
+      ],
+    );
   }
 }
