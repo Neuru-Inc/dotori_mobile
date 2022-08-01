@@ -10,20 +10,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> images = [
-    'asset/img/main_sample_1.png',
-    'asset/img/main_sample_2.png',
-    'asset/img/main_sample_3.png',
-    'asset/img/main_sample_4.png',
-  ];
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        _CarouselSlider(),
+        Container(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("추천~", style: TextStyle(fontSize: 32)),
+            ],
+          ),
+        ))
+      ],
+    );
+  }
+}
+
+class _CarouselSlider extends StatelessWidget {
+  const _CarouselSlider({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final List<String> images = [
+      'asset/img/main_sample_1.png',
+      'asset/img/main_sample_2.png',
+      'asset/img/main_sample_3.png',
+    ];
+
     return Container(
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.7,
         child: CarouselSlider(
           options: CarouselOptions(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.6,
             enlargeCenterPage: true,
           ),
           items: [0, 1, 2].map((i) {
@@ -41,8 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    width: MediaQuery.of(context).size.width - 16.0,
                     child: ArtCard(
+                      id: i,
                       image: images[i],
                     ));
               },
@@ -51,15 +73,3 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 }
-
-
-// ListView.separated(
-//             scrollDirection: Axis.horizontal,
-//             itemBuilder: (context, index) {
-//               return Padding(
-//                 padding: const EdgeInsets.all(8.0),
-//                 child: ,
-//               );
-//             },
-//             separatorBuilder: (context, index) => const SizedBox(width: 16),
-//             itemCount: 3)

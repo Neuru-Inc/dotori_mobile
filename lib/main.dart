@@ -1,12 +1,18 @@
+import 'package:dotori_mobile/screens/art_detail_screen.dart';
 import 'package:dotori_mobile/screens/home_screen.dart';
+import 'package:dotori_mobile/screens/art_detail_screen.dart';
 import 'package:dotori_mobile/const/colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {
+      '/': (context) => App(),
+      '/art_detail': (context) => ArtDetailScreen(),
+    },
     debugShowCheckedModeBanner: false,
     theme: ThemeData(primaryColor: PRIMARY_COLOR, fontFamily: 'NotoSans'),
-    home: App(),
   ));
 }
 
@@ -60,7 +66,7 @@ class _AppState extends State<App> {
               label: 'image_search',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag),
+              icon: Icon(Icons.bookmark_border_outlined),
               label: 'shopping_bag',
             ),
             BottomNavigationBarItem(

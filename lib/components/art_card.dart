@@ -1,17 +1,60 @@
+import 'package:dotori_mobile/screens/art_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class ArtCard extends StatelessWidget {
+  final int id;
   final String image;
-  const ArtCard({required this.image, Key? key}) : super(key: key);
+  const ArtCard({required this.id, required this.image, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(fit: StackFit.expand, children: [
-      ClipRRect(
-          borderRadius: BorderRadius.circular(15.0),
-          child: Image.asset(image, fit: BoxFit.cover)),
-      _Content()
-    ]);
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            PageRouteBuilder(
+              settings: RouteSettings(arguments: {
+                'id': id,
+                'image': image,
+              }),
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  ArtDetailScreen(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return ScaleTransition(
+                  scale: animation,
+                  child: child,
+                );
+              },
+            ));
+      },
+      child: Stack(fit: StackFit.expand, children: [
+        ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: Hero(
+                tag: 'art_detail_$id',
+                child: Image.asset(image, fit: BoxFit.cover))),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_back_ios),
+              color: Color.fromARGB(130, 255, 255, 255),
+              iconSize: 40,
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_forward_ios),
+              color: Color.fromARGB(130, 255, 255, 255),
+              iconSize: 40,
+            ),
+          ],
+        ),
+        _Content()
+      ]),
+    );
   }
 }
 
@@ -90,29 +133,56 @@ class _Content extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.white)),
               SizedBox(height: 4),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                IconButton(
-                  icon: Icon(Icons.favorite_border, color: Colors.white),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: Icon(Icons.bookmark_border, color: Colors.white),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: Icon(Icons.comment_bank, color: Colors.white),
-                  onPressed: () {},
-                ),
-                SizedBox(width: 16),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
-                    textStyle: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  child: Text("자세히 보기"),
-                ),
-              ]),
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        IconButton(
+                          icon:
+                              Icon(Icons.favorite_border, color: Colors.white),
+                          onPressed: () {},
+                        ),
+                        Text("2.7k",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 12)),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          icon:
+                              Icon(Icons.bookmark_border, color: Colors.white),
+                          onPressed: () {},
+                        ),
+                        Text("1.3k",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 12)),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.comment_bank, color: Colors.white),
+                          onPressed: () {},
+                        ),
+                        Text("1.1k",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 12)),
+                      ],
+                    ),
+                    SizedBox(width: 8),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.all(8),
+                        primary: Colors.black,
+                        textStyle: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      child: Text("Purchase/Inquiry"),
+                    ),
+                  ]),
               SizedBox(height: 16)
             ],
           ),
