@@ -48,17 +48,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDDujBzbqYTBT5JTB-B3I5wwx0uyGs4weI',
-    appId: '1:55527379469:web:d9955a5a45177798b53b44',
+    appId: '1:55527379469:web:fababdf272945f5db53b44',
     messagingSenderId: '55527379469',
     projectId: 'dotori-a42bb',
     authDomain: 'dotori-a42bb.firebaseapp.com',
     storageBucket: 'dotori-a42bb.appspot.com',
-    measurementId: 'G-HTX105Z200',
+    measurementId: 'G-LS0LLFKYGZ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCTnC6cu7AVBooY7__bSGCR8VG9TWx0P0Y',
-    appId: '1:55527379469:android:c45790344efbbde7b53b44',
+    appId: '1:55527379469:android:843403e051a41f5eb53b44',
     messagingSenderId: '55527379469',
     projectId: 'dotori-a42bb',
     storageBucket: 'dotori-a42bb.appspot.com',
@@ -66,10 +66,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAf6HjG13MP5n6LZmRH3N3mWVJbrJDUO7Q',
-    appId: '1:55527379469:ios:f1578e04ee8a9c84b53b44',
+    appId: '1:55527379469:ios:7b2ba97181f5fad4b53b44',
     messagingSenderId: '55527379469',
     projectId: 'dotori-a42bb',
     storageBucket: 'dotori-a42bb.appspot.com',
+    androidClientId: '55527379469-dkp8ou8c8s6v6cevvq345l2ms4uknl50.apps.googleusercontent.com',
     iosClientId: '55527379469-kls6du6vtc6ls4vn0mm31gn6hd3vcqd9.apps.googleusercontent.com',
     iosBundleId: 'com.example.dotoriMobile',
   );
